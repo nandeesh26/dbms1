@@ -86,7 +86,7 @@ class supplierclass:
                 messagebox.showerror("Error","invoice must be required",parent=self.root)
             else:
                 cur.execute("Select * from supplier where invoice=?",(self.variable_supplierinvoice.get(),))
-                row=cur.fetchone()
+                row=cur.fetchall()
                 if row!=None:
                     messagebox.showerror("Error","This invoice no. already exists try different one",parent=self.root)
                 else:

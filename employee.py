@@ -174,7 +174,7 @@ class Employeeclass:
         f=self.employeetable.focus()
         content=(self.employeetable.item(f))
         row=content['values']
-        print(row)
+        #print(row)
         self.variable_empid.set(row[0]),
         self.variable_name.set(row[1]),
         self.variable_email.set(row[2]),
@@ -276,21 +276,23 @@ class Employeeclass:
                 messagebox.showerror("Error","Select anything other than search",parent=self.root)
             else:
 
-                cur.execute("select * from employee where"+self.variable_searchby.get()+"LIKE %"+self.variable_searchtext.get()+"%")
+                cur.execute("select * from employee where "+self.variable_searchby.get()+" LIKE '%"+self.variable_searchtext.get()+"%'",)
                 rows=cur.fetchall()
                 if len(rows)!=0:
                     self.employeetable.delete(*self.employeetable.get_children())
                     for row in rows:
                         self.employeetable.insert('',END,values=row)
+
                 else:
                     messagebox.showerror("Error","No record found",parent=self.root)
+            
 
 
 
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to :{str(ex)}",parent=self.root)    
 
-
+    
 
 if __name__=="__main__":
     root=Tk()
